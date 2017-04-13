@@ -11,7 +11,7 @@ public class Distribution {
 
     final static int	RANGE	= 128;	// /< Only interested in 7-bit ASCII characters
 
-    double[]			p;				// /< probability distribution
+    static double[]			p;				// /< probability distribution
     static char[]       chars;
     public Distribution() {
 
@@ -65,13 +65,19 @@ public class Distribution {
      *
      * @return entropy (in bits)
      */
-    public double entropy() {
+    public static double entropy() {
         //H(X) = sum over all x {-p(x) * log(p(x))}
 
         double result = 0.0;
 
-        // TODO
-
+        for(int i=0; i<p.length; i++){
+            double px = p[i];
+            result += -(px * log2(px));
+            //result += -(px * (Math.log(px)/Math.log(2)));
+            // System.out.println(px);
+            //System.out.println(result);
+        }
+        //System.out.println("entropy = " + result);
         return result;
     }
 
@@ -82,4 +88,11 @@ public class Distribution {
             return 0;
         }
     }
+
+//    public static void main(String[] args){
+//        String test = "I am a test string";
+//        fromString(test);
+//        entropy();
+//
+//    }
 }
